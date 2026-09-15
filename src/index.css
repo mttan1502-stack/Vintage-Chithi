@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif;
+    background-color: #0e0c0a;
+    color: #f4ecd8;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Noto Serif Bengali', 'Playfair Display', serif;
+  }
+}
+
+.font-bengali-serif {
+  font-family: 'Noto Serif Bengali', 'Playfair Display', serif;
+}
+
+.font-bengali-sans {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+.font-bengali-tiro {
+  font-family: 'Tiro Bangla', 'Noto Serif Bengali', serif;
+}
+
+.font-vintage-serif {
+  font-family: 'Playfair Display', 'Noto Serif Bengali', serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-typewriter {
+  font-family: 'Courier Prime', monospace;
+}
+
+.font-calligraphy {
+  font-family: 'Dancing Script', 'Tiro Bangla', cursive;
+}
+
+/* Custom Vintage Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #14110e;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a2e24;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #524133;
+}
+
+/* Vintage Paper Textures & Effects */
+.vintage-grain {
+  background-image: radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.parchment-bg {
+  background-color: #f4ecd8;
+  background-image: 
+    radial-gradient(#eedcb7 15%, transparent 16%),
+    radial-gradient(#ebd6ab 15%, transparent 16%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+
+/* Postcard Frame & Stamp Styling */
+.postage-stamp {
+  position: relative;
+  background: #fbf6ec;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.vintage-seal {
+  background: radial-gradient(circle at 30% 30%, #a82035, #68101e);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.2);
+}
+
+/* Vintage Border Styles */
+.border-vintage-double {
+  border: 4px double rgba(197, 160, 89, 0.45);
+}
+
+.border-vintage-ornate {
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  outline: 1px dashed rgba(212, 175, 55, 0.3);
+  outline-offset: -6px;
+}
+
+.border-vintage-corner {
+  position: relative;
+}
+.border-vintage-corner::before,
+.border-vintage-corner::after {
+  content: "✦";
+  position: absolute;
+  color: #c5a059;
+  font-size: 10px;
+  opacity: 0.7;
+}
+.border-vintage-corner::before {
+  top: 4px;
+  left: 4px;
+}
+.border-vintage-corner::after {
+  bottom: 4px;
+  right: 4px;
+}
+

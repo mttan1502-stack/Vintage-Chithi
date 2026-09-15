@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vintage Chithi – ভিন্টেজ প্রেমপত্র ও পোস্টকার্ড নির্মাতা</title>
+  <meta name="description" content="পুরনো দিনের অনুভূতি, আজকের ভালোবাসার জন্য। অনলাইনে তৈরি করুন নান্দনিক ভিন্টেজ চিঠি ও পোস্টকার্ড।" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      background-color: #0e0c0a;
+      color: #f4ecd8;
+      font-family: 'Hind Siliguri', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-noto-bengali { font-family: 'Noto Serif Bengali', serif; }
+    .font-tiro-bengali { font-family: 'Tiro Bangla', serif; }
+    .font-dancing { font-family: 'Dancing Script', cursive; }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .font-courier { font-family: 'Courier Prime', monospace; }
+    
+    /* Vintage Paper Textures & Filters */
+    .filter-sepia { filter: sepia(0.65) contrast(1.05) brightness(0.92); }
+    .filter-warm { filter: sepia(0.35) saturate(1.2) hue-rotate(-15deg); }
+    .filter-antique { filter: sepia(0.8) contrast(1.1) brightness(0.85); }
+    .filter-mono { filter: grayscale(1) contrast(1.15) brightness(0.9); }
+    .filter-fade { filter: sepia(0.4) contrast(0.85) brightness(1.05); }
+    .filter-gold { filter: sepia(0.5) saturate(1.4) contrast(1.05); }
+    .filter-none { filter: none; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #16100c; }
+    ::-webkit-scrollbar-thumb { background: #423225; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #83182b; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#83182b] selection:text-[#fbf6ec]">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 bg-[#120e0c]/95 backdrop-blur border-b border-[#c5a059]/25 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+      <div class="flex items-center gap-2.5 cursor-pointer" onclick="scrollToTop()">
+        <span class="text-2xl sm:text-3xl">💌</span>
+        <div>
+          <div class="font-noto-bengali text-lg sm:text-2xl font-bold tracking-wide text-[#f4ecd8]">
+            Vintage Chithi
+          </div>
+          <div id="nav-tagline" class="text-[10px] sm:text-xs text-[#a89984] hidden sm:block">
+            পুরনো দিনের অনুভূতি, আজকের ভালোবাসার জন্য
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <!-- Language Switcher -->
+        <button id="lang-toggle-btn" onclick="toggleLanguage()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#1f1712] border border-[#c5a059]/40 hover:border-[#d4af37] text-[#e8d5b5] hover:text-white transition shadow flex items-center gap-1.5 active:scale-95">
+          <span>🌐</span>
+          <span id="lang-btn-text">English</span>
+        </button>
+
+        <!-- Surprise Me -->
+        <button onclick="handleSurpriseMe()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#2b1f16] border border-[#d4af37]/40 hover:border-[#ffd700] text-[#f4ecd8] transition shadow flex items-center gap-1 active:scale-95">
+          <span>🎲</span>
+          <span id="surprise-text" class="hidden sm:inline">Surprise Me</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-10 sm:py-14 bg-gradient-to-b from-[#16110d] via-[#100d0a] to-[#0e0c0a] border-b border-[#2d2017]">
+    <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#83182b]/30 border border-[#83182b] text-[#ffd700] text-xs font-medium">
+        <span>✨ Standalone Single-File Edition (সম্পূর্ণ অফলাইন প্রস্তুত)</span>
+      </div>
+      <h1 id="hero-title" class="text-3xl sm:text-5xl font-bold font-noto-bengali text-[#f4ecd8] tracking-tight leading-tight">
+        হৃদয়ের কথা লিখুন ক্লাসিক ভিন্টেজ পোস্টকার্ডে
+      </h1>
+      <p id="hero-subtitle" class="text-sm sm:text-lg text-[#c4b39e] max-w-2xl mx-auto leading-relaxed">
+        পুরনো দিনের জীর্ণ চিঠি, সুবাসিত হলুদ খাম ও ধ্রুপদী প্রেমের উক্তি দিয়ে তৈরি করুন আপনার নিজস্ব নান্দনিক পোস্টকার্ড।
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Studio Workspace -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Controls (lg: 6 cols) -->
+      <div class="lg:col-span-6 space-y-5">
+        <!-- Step Navigation Tabs -->
+        <div class="grid grid-cols-5 p-1 bg-[#18120e] rounded-xl border border-[#33251a] text-center text-xs">
+          <button id="tab-btn-designs" onclick="switchTab('designs')" class="tab-btn py-2 px-1 rounded-lg font-medium transition bg-[#83182b] text-white shadow border border-[#d4af37]/40">
+            ১. ডিজাইন
+          </button>
+          <button id="tab-btn-quotes" onclick="switchTab('quotes')" class="tab-btn py-2 px-1 rounded-lg font-medium transition text-[#a89984] hover:text-white">
+            ২. উক্তি
+          </button>
+          <button id="tab-btn-letter" onclick="switchTab('letter')" class="tab-btn py-2 px-1 rounded-lg font-medium transition text-[#a89984] hover:text-white">
+            ৩. লেখা
+          </button>
+          <button id="tab-btn-style" onclick="switchTab('style')" class="tab-btn py-2 px-1 rounded-lg font-medium transition text-[#a89984] hover:text-white">
+            ৪. স্টাইল
+          </button>
+          <button id="tab-btn-effects" onclick="switchTab('effects')" class="tab-btn py-2 px-1 rounded-lg font-medium transition text-[#a89984] hover:text-white">
+            ৫. ইফেক্ট
+          </button>
+        </div>
+
+        <!-- PANEL 1: DESIGNS -->
+        <div id="panel-designs" class="tab-panel p-5 bg-[#17120e] rounded-xl border border-[#312419] space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 id="panel-designs-title" class="text-sm font-semibold font-noto-bengali text-[#ebd9b7]">
+              ১. পোস্টকার্ড ডিজাইন নির্বাচন করুন
+            </h3>
+            <span class="text-xs text-[#c5a059]">ক্লিক করে বাছুন</span>
+          </div>
+          <div id="template-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 max-h-96 overflow-y-auto pr-1">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- PANEL 2: QUOTES -->
+        <div id="panel-quotes" class="tab-panel hidden p-5 bg-[#17120e] rounded-xl border border-[#312419] space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 id="panel-quotes-title" class="text-sm font-semibold font-noto-bengali text-[#ebd9b7]">
+              ২. বিখ্যাত কবিদের রোমান্টিক উক্তি
+            </h3>
+            <span class="text-xs text-[#c5a059]">গালিব, নজরুল, ফরীদি</span>
+          </div>
+
+          <!-- Search & Author Filter -->
+          <input 
+            type="text" 
+            id="quote-search-input" 
+            oninput="renderQuotes()" 
+            placeholder="উক্তি বা কবি খুঁজুন (গালিব, ফরীদি, নজরুল, বিরহ, বৃষ্টি)..."
+            class="w-full bg-[#1e1712] border border-[#3b2c20] focus:border-[#c5a059] rounded-lg px-3 py-2 text-xs text-[#f4ecd8] outline-none"
+          />
+
+          <div id="quote-author-tags" class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px]">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div id="quotes-list" class="space-y-2.5 max-h-96 overflow-y-auto pr-1">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- PANEL 3: LETTER TEXT -->
+        <div id="panel-letter" class="tab-panel hidden p-5 bg-[#17120e] rounded-xl border border-[#312419] space-y-4">
+          <h3 id="panel-letter-title" class="text-sm font-semibold font-noto-bengali text-[#ebd9b7]">
+            ৩. চিঠি বা বার্তা কাস্টমাইজ করুন
+          </h3>
+
+          <div>
+            <label id="lbl-recipient" class="block text-xs text-[#c2b3a1] font-medium mb-1">চিঠির প্রাপক (Recipient):</label>
+            <input 
+              type="text" 
+              id="input-recipient" 
+              value="প্রিয়তমাসু" 
+              oninput="updateCustomState()"
+              class="w-full bg-[#1e1712] border border-[#3b2c20] focus:border-[#c5a059] rounded-lg px-3 py-2 text-sm text-[#f4ecd8] outline-none"
+            />
+          </div>
+
+          <div>
+            <label id="lbl-message" class="block text-xs text-[#c2b3a1] font-medium mb-1">মূল চিঠি বা পঙ্‌ক্তি (Letter Body):</label>
+            <textarea 
+              id="input-message" 
+              rows="4" 
+              oninput="updateCustomState()"
+              class="w-full bg-[#1e1712] border border-[#3b2c20] focus:border-[#c5a059] rounded-lg p-3 text-sm text-[#f4ecd8] outline-none leading-relaxed resize-none"
+            >তুমি আমার সেই না-বলা চিঠি, যার প্রতিটি লাইনে লুকিয়ে থাকে সহস্র রাতের নির্ঘুম ভালোবাসা।</textarea>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label id="lbl-sender" class="block text-xs text-[#c2b3a1] font-medium mb-1">চিঠির প্রেরক (Sender):</label>
+              <input 
+                type="text" 
+                id="input-sender" 
+                value="ইতি, তোমার..." 
+                oninput="updateCustomState()"
+                class="w-full bg-[#1e1712] border border-[#3b2c20] focus:border-[#c5a059] rounded-lg px-3 py-2 text-sm text-[#f4ecd8] outline-none"
+              />
+            </div>
+            <div>
+              <label id="lbl-date" class="block text-xs text-[#c2b3a1] font-medium mb-1">তারিখ বা স্থান (Date/Place):</label>
+              <input 
+                type="text" 
+                id="input-date" 
+                value="আষাঢ়, ১৩৭৮" 
+                oninput="updateCustomState()"
+                class="w-full bg-[#1e1712] border border-[#3b2c20] focus:border-[#c5a059] rounded-lg px-3 py-2 text-sm text-[#f4ecd8] outline-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4: STYLING & TYPOGRAPHY -->
+        <div id="panel-style" class="tab-panel hidden p-5 bg-[#17120e] rounded-xl border border-[#312419] space-y-4">
+          <h3 id="panel-style-title" class="text-sm font-semibold font-noto-bengali text-[#ebd9b7]">
+            ৪. টাইপোগ্রাফি ও লেআউট
+          </h3>
+
+          <!-- Font Family -->
+          <div>
+            <label class="block text-xs text-[#c2b3a1] font-medium mb-1.5">হরফ শৈলী (Font Style):</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="font-family-buttons">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Font Size Slider -->
+          <div>
+            <div class="flex justify-between text-xs text-[#c2b3a1] mb-1">
+              <span>ফন্ট সাইজ (Font Size):</span>
+              <span id="font-size-val" class="font-mono text-[#c5a059]">22px</span>
+            </div>
+            <input type="range" id="input-font-size" min="16" max="32" value="22" oninput="updateCustomState()" class="w-full accent-[#c5a059]" />
+          </div>
+
+          <!-- Alignment & Format -->
+          <div class="flex items-center justify-between pt-2">
+            <div class="flex items-center gap-1 bg-[#1e1712] p-1 rounded-lg border border-[#3b2c20]">
+              <button onclick="setTextAlign('left')" id="btn-align-left" class="px-2.5 py-1 text-xs rounded text-[#a89984]">Left</button>
+              <button onclick="setTextAlign('center')" id="btn-align-center" class="px-2.5 py-1 text-xs rounded bg-[#83182b] text-white">Center</button>
+              <button onclick="setTextAlign('right')" id="btn-align-right" class="px-2.5 py-1 text-xs rounded text-[#a89984]">Right</button>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="toggleBold()" id="btn-bold" class="px-3 py-1 text-xs font-bold rounded border border-[#3b2c20] bg-[#1e1712] text-[#a89984]">B</button>
+              <button onclick="toggleItalic()" id="btn-italic" class="px-3 py-1 text-xs italic rounded border border-[#3b2c20] bg-[#1e1712] text-[#a89984]">I</button>
+            </div>
+          </div>
+
+          <!-- Ink Color Swatches -->
+          <div>
+            <label class="block text-xs text-[#c2b3a1] font-medium mb-1.5">কালির রঙ (Ink Color):</label>
+            <div class="flex items-center gap-2" id="color-swatches">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 5: EFFECTS & SEALS -->
+        <div id="panel-effects" class="tab-panel hidden p-5 bg-[#17120e] rounded-xl border border-[#312419] space-y-4">
+          <h3 id="panel-effects-title" class="text-sm font-semibold font-noto-bengali text-[#ebd9b7]">
+            ৫. ভিন্টেজ ফিল্টার, সিলমোহর ও বর্ডার
+          </h3>
+
+          <!-- Vintage Filters -->
+          <div>
+            <label class="block text-xs text-[#c2b3a1] font-medium mb-1.5">ভিন্টেজ ফটো ফিল্টার:</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="filter-buttons">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Stamp & Seal -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div>
+              <label class="block text-xs text-[#c2b3a1] font-medium mb-1">ডাকটিকিট / সিলমোহর:</label>
+              <div class="flex items-center gap-2">
+                <button onclick="toggleStamp()" id="btn-stamp-toggle" class="px-3 py-1.5 text-xs rounded-lg border bg-[#291e17] text-[#c5a059] border-[#c5a059]">
+                  টিকিট দৃশ্যমান ✓
+                </button>
+                <button onclick="toggleStampType()" id="btn-stamp-type" class="px-3 py-1.5 text-xs rounded-lg bg-[#1e1712] text-[#ebd9b7] border border-[#3b2c20]">
+                  ধরন: ডাকটিকিট
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs text-[#c2b3a1] font-medium mb-1">বর্ডার শৈলী (Border):</label>
+              <select id="select-border" onchange="updateCustomState()" class="w-full bg-[#1e1712] border border-[#3b2c20] rounded-lg px-3 py-1.5 text-xs text-[#f4ecd8] outline-none">
+                <option value="vintage">ভিন্টেজ কর্নার (Vintage)</option>
+                <option value="double">গোল্ডেন ডাবল লাইন (Double)</option>
+                <option value="ornate">অলঙ্কৃত ডাবল (Ornate)</option>
+                <option value="simple">সরল রেখা (Simple)</option>
+                <option value="none">বর্ডারহীন (None)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Postcard Live Preview & HD Export (lg: 6 cols) -->
+      <div class="lg:col-span-6 space-y-4 lg:sticky lg:top-24">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-cinzel text-[#d4af37] tracking-wider uppercase flex items-center gap-1.5">
+            <span>🔴 লাইভ পোস্টকার্ড প্রিভিউ (Live Preview)</span>
+          </span>
+          <span class="text-[11px] text-[#8c7d6c]">১:১ আসল আউটপুট</span>
+        </div>
+
+        <!-- Postcard Canvas Container -->
+        <div class="p-3 bg-[#16100c] border border-[#c5a059]/40 rounded-xl shadow-2xl overflow-hidden flex justify-center">
+          <div id="postcard-preview-card" class="relative w-full aspect-[3/2] max-w-lg rounded-lg overflow-hidden border-2 border-[#83182b]/60 shadow-2xl bg-[#2b1f17] flex flex-col justify-between p-6">
+            <!-- Background Image with Filter -->
+            <img id="card-bg-img" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover filter-sepia transition-all duration-300 pointer-events-none" />
+            
+            <!-- Dark Parchment Tint -->
+            <div class="absolute inset-0 bg-black/40 pointer-events-none"></div>
+
+            <!-- Vintage Decorative Border Overlay -->
+            <div id="card-border-overlay" class="absolute inset-2 border-2 border-[#d4af37]/60 pointer-events-none rounded"></div>
+
+            <!-- Top Row: Recipient & Stamp -->
+            <div class="relative z-10 flex items-start justify-between">
+              <div id="card-recipient" class="font-noto-bengali text-sm sm:text-base font-semibold text-[#faebd7] drop-shadow-md">
+                প্রিয়তমাসু
+              </div>
+
+              <!-- Stamp / Seal icon -->
+              <div id="card-stamp" class="w-12 h-14 bg-[#faebd7]/90 border-2 border-dashed border-[#83182b] p-1 shadow-md flex flex-col items-center justify-center text-center rotate-3">
+                <span class="text-xs">🌹</span>
+                <span class="text-[8px] font-mono text-[#83182b] font-bold mt-0.5">POST 5p</span>
+              </div>
+            </div>
+
+            <!-- Center Row: Main Love Message / Verse -->
+            <div class="relative z-10 my-auto text-center px-4">
+              <div id="card-message" class="font-noto-bengali text-base sm:text-lg text-[#f6edd9] leading-relaxed drop-shadow-md">
+                “তুমি আমার সেই না-বলা চিঠি, যার প্রতিটি লাইনে লুকিয়ে থাকে সহস্র রাতের নির্ঘুম ভালোবাসা।”
+              </div>
+            </div>
+
+            <!-- Bottom Row: Date & Sender -->
+            <div class="relative z-10 flex items-end justify-between text-xs sm:text-sm text-[#ebd9b7] drop-shadow-md">
+              <div id="card-date" class="font-mono text-[11px] opacity-85">
+                আষাঢ়, ১৩৭৮
+              </div>
+              <div id="card-sender" class="font-noto-bengali font-semibold">
+                ইতি, তোমার...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Button -->
+        <button 
+          onclick="openDownloadModal()" 
+          class="w-full py-4 px-6 bg-gradient-to-r from-[#83182b] to-[#a32238] hover:from-[#941c32] hover:to-[#b82941] text-[#fdf8f0] font-bold text-base sm:text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all border border-[#d4af37]/60 active:scale-[0.98] flex items-center justify-center gap-2.5"
+        >
+          <span>⬇️</span>
+          <span id="btn-download-text">HD পোস্টকার্ড ডাউনলোড করুন (Download)</span>
+        </button>
+        <p class="text-[11px] text-center text-[#8c7a69]">
+          ১০০% ফ্রিতে কোনো ওয়াটারমার্ক ছাড়া ফুল HD কোয়ালিটিতে সেভ হবে।
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 8-Second Sponsor Verification Gate Modal -->
+  <div id="download-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm hidden">
+    <div class="bg-[#1b140f] border-2 border-[#c5a059]/60 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 text-center relative">
+      <button onclick="closeDownloadModal()" class="absolute top-4 right-4 text-[#a89984] hover:text-white text-lg">✕</button>
+
+      <div class="w-12 h-12 rounded-full bg-[#83182b]/30 border border-[#83182b] mx-auto flex items-center justify-center text-2xl">
+        💌
+      </div>
+
+      <div>
+        <h3 id="modal-title" class="text-xl font-bold font-noto-bengali text-[#ebd9b7]">
+          আপনার ভিন্টেজ চিঠি প্রস্তুত হচ্ছে...
+        </h3>
+        <p id="modal-desc" class="text-xs text-[#c2b3a1] mt-1">
+          ৮ সেকেন্ডের স্পনসর পেজ ভিজিট করলেই স্বয়ংক্রিয়ভাবে ফুল HD ফাইল ডাউনলোড হবে।
+        </p>
+      </div>
+
+      <!-- Format selector -->
+      <div class="bg-[#241c16] p-2.5 rounded-lg flex items-center justify-center gap-3 text-xs">
+        <label class="cursor-pointer flex items-center gap-1.5">
+          <input type="radio" name="modal-fmt" value="png" checked class="accent-[#c5a059]"> PNG (উচ্চ মান)
+        </label>
+        <label class="cursor-pointer flex items-center gap-1.5">
+          <input type="radio" name="modal-fmt" value="jpg" class="accent-[#c5a059]"> JPG (কম্প্যাক্ট)
+        </label>
+      </div>
+
+      <!-- Sponsor Button & Countdown -->
+      <div class="space-y-3">
+        <button 
+          id="btn-visit-sponsor" 
+          onclick="handleSponsorClick()" 
+          class="w-full py-3 px-4 bg-[#2b1f16] hover:bg-[#38281d] border border-[#d4af37]/60 text-[#fbf6ec] font-semibold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 transition"
+        >
+          <span>🌐 স্পনসর পেজ ভিজিট করুন (৮ সেকেন্ড অপেক্ষা)</span>
+        </button>
+
+        <div id="countdown-container" class="hidden p-3 bg-[#241a13] rounded-lg border border-[#3b2b1d]">
+          <div class="text-xs text-[#d4af37]">ডাউনলোড শুরু হবে:</div>
+          <div id="countdown-val" class="text-2xl font-bold font-mono text-[#ffd700] my-1">8s</div>
+          <div class="text-[11px] text-[#8c7d6c]">স্পনসর পৃষ্ঠাটি চালু রাখুন</div>
+        </div>
+
+        <button 
+          id="btn-perform-download" 
+          disabled 
+          onclick="performCanvasExport()" 
+          class="w-full py-3 px-4 bg-gradient-to-r from-[#83182b] to-[#a32238] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-sm rounded-xl shadow transition"
+        >
+          <span>✨ এখনই পোস্টকার্ড ডাউনলোড করুন</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Off-screen Canvas for Ultra HD Render -->
+  <canvas id="export-canvas" width="1200" height="800" class="hidden"></canvas>
+
+  <!-- Footer -->
+  <footer class="bg-[#0b0907] border-t border-[#261b13] py-8 text-center text-xs text-[#7d6f60] space-y-2">
+    <div class="font-noto-bengali text-sm text-[#ebd9b7] font-semibold">Vintage Chithi – ভিন্টেজ প্রেমের পোস্টকার্ড</div>
+    <div>“পুরনো দিনের অনুভূতি, আজকের ভালোবাসার জন্য।”</div>
+    <div>© 2026 Vintage Chithi. All rights reserved. Made with love & classical literature.</div>
+  </footer>
+
+  <!-- Complete Standalone Javascript Logic -->
+  <script>
+    // 1. DATA: POSTCARD TEMPLATES
+    const TEMPLATES = [
+      { id: 'rainy-window', title: 'বৃষ্টিভেজা জানালা', titleEn: 'Rainy Window Pane', image: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1200&auto=format&fit=crop' },
+      { id: 'vintage-roses', title: 'শুকনো গোলাপ ও চিঠি', titleEn: 'Dried Roses & Parchment', image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop' },
+      { id: 'candlelight', title: 'মোমবাতির ম্লান আলো', titleEn: 'Flickering Candlelight', image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop' },
+      { id: 'autumn-leaves', title: 'হেমন্তের ঝরা পাতা', titleEn: 'Autumn Fallen Leaves', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop' },
+      { id: 'fountain-pen', title: 'পুরনো দোয়াত-কলম', titleEn: 'Antique Quill & Ink', image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1200&auto=format&fit=crop' },
+      { id: 'telegram', title: 'হলুদ টেলিগ্রাম কাগজ', titleEn: 'Aged Telegram Paper', image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=1200&auto=format&fit=crop' },
+      { id: 'tea-cups', title: 'এক কাপ চা ও চিঠি', titleEn: 'Tea & Nostalgic Letters', image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=1200&auto=format&fit=crop' },
+      { id: 'typewriter', title: 'ভিন্টেজ টাইপরাইটার', titleEn: 'Vintage Typewriter Desk', image: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?q=80&w=1200&auto=format&fit=crop' },
+    ];
+
+    // 2. DATA: QUOTES DATABASE
+    const QUOTES = [
+      { id: 'faridi-1', author: 'হুমায়ুন ফরীদি', authorEn: 'Humayun Faridi', text: 'তুমি যাকে ভালোবাসো তাকে মুক্ত করে দাও। সে যদি ফিরে আসে তবে সে তোমার, আর না আসলে সে কখনোই তোমার ছিল না।', textEn: 'Set free what you love. If it returns, it was yours forever; if not, it never was.' },
+      { id: 'faridi-2', author: 'হুমায়ুন ফরীদি', authorEn: 'Humayun Faridi', text: 'ভালোবাসা কোনো লেনদেন নয়, ভালোবাসা হলো নিঃস্বার্থ সমর্পণ। এক জীবনে কাউকে অন্ধের মতো ভালোবেসে যাওয়াও এক অদ্ভুত সুন্দর অসুখ।', textEn: 'Love is not a transaction; it is selfless surrender. To love blindly in one lifetime is a magnificent illness.' },
+      { id: 'ghalib-1', author: 'মির্জা গালিব', authorEn: 'Mirza Ghalib', text: 'হাজারো এমন আকাঙ্ক্ষা ছিল যে প্রতিটি আকাঙ্ক্ষার জন্য প্রাণ বিসর্জন দেওয়া যায়; অনেক পূরণ হলো, তবু যেন অনেক কম ছিল।', textEn: 'Thousands of desires, each worth dying for; many were fulfilled, yet so few they seemed.' },
+      { id: 'ghalib-2', author: 'মির্জা গালিব', authorEn: 'Mirza Ghalib', text: 'ইশক এমন এক আগুন গালিব, যা জ্বালালে জ্বলে না আর নেভালে নেভে না।', textEn: 'Love is that fire, Ghalib, which cannot be ignited by force, nor extinguished when ablaze.' },
+      { id: 'nazrul-1', author: 'কাজী নজরুল ইসলাম', authorEn: 'Kazi Nazrul Islam', text: 'তুমি সুন্দর, তাই চেয়ে থাকি প্রিয়, সে কি মোর অপরাধ? চাঁদেরে হেরিয়া কাঁদে চকোরিণী, বলে না তো কিছু চাঁদ।', textEn: 'You are so beautiful, that is why I gaze, my beloved; is that my crime?' },
+      { id: 'nazrul-2', author: 'কাজী নজরুল ইসলাম', authorEn: 'Kazi Nazrul Islam', text: 'তুমি ভুলে যেও যবে নামিবে আঁধার, আমি রব চিরকাল স্মৃতিতে তোমার।', textEn: 'Forget me when darkness falls, yet I shall reside forever within your memories.' },
+      { id: 'faiz-1', author: 'ফয়েজ আহমেদ ফয়েজ', authorEn: 'Faiz Ahmed Faiz', text: 'আমার ভালোবাসার মানুষ, আমার কাছে আর আগের মতো প্রেম চেয়ো না; তোমার রূপ ছাড়াও পৃথিবীতে আরও অনেক দুঃখ রয়েছে।', textEn: 'Do not ask of me, my beloved, that same love of yesteryears; there are miseries in this world far beyond your beauty.' },
+      { id: 'mir-1', author: 'মির তকি মির', authorEn: 'Mir Taqi Mir', text: 'প্রেমের এই তো কেবল শুরু, কেন এখনই কাঁদছ? সামনে দেখো আরও কত কি ঘটে!', textEn: 'Love has only just begun, why weep so soon? Behold what lies ahead!' },
+      { id: 'hafez-1', author: 'হাফেজ শিরাজী', authorEn: 'Hafez Shirazi', text: 'আমার হৃদয়ের বাগানে তোমার নামের গোলাপ ফুটে থাকে, যার সুবাসে আমার প্রতিটি নিঃশ্বাস রঙিন হয়ে ওঠে।', textEn: 'In the garden of my heart blooms the rose of your name, its fragrance coloring every breath I take.' },
+      { id: 'vintage-love-1', author: 'অজ্ঞাত প্রেমপত্র', authorEn: 'Vintage Letter', text: 'তুমি আমার সেই না-বলা চিঠি, যার প্রতিটি লাইনে লুকিয়ে থাকে সহস্র রাতের নির্ঘুম ভালোবাসা।', textEn: 'You are my unwritten letter, in whose every line dwells the sleepless love of a thousand nights.' }
+    ];
+
+    // 3. STATE
+    let currentLang = 'bn'; // 'bn' | 'en'
+    let selectedTemplate = TEMPLATES[0];
+    let selectedFont = 'font-noto-bengali';
+    let selectedFilter = 'filter-sepia';
+    let selectedColor = '#f6edd9';
+    let selectedBorder = 'vintage';
+    let showStamp = true;
+    let stampType = 'rose';
+    let isBold = false;
+    let isItalic = false;
+    let textAlign = 'center';
+    let currentAuthorFilter = 'all';
+
+    // 4. TAB NAVIGATION
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('bg-[#83182b]', 'text-white', 'border-[#d4af37]/40');
+        b.classList.add('text-[#a89984]');
+      });
+
+      document.getElementById('panel-' + tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      activeBtn.classList.add('bg-[#83182b]', 'text-white', 'border-[#d4af37]/40');
+      activeBtn.classList.remove('text-[#a89984]');
+    }
+
+    // 5. RENDER TEMPLATES
+    function renderTemplates() {
+      const grid = document.getElementById('template-grid');
+      grid.innerHTML = '';
+      TEMPLATES.forEach(t => {
+        const isSelected = selectedTemplate.id === t.id;
+        const div = document.createElement('div');
+        div.className = `relative aspect-[3/2] rounded-lg overflow-hidden cursor-pointer border transition-all ${
+          isSelected ? 'border-[#d4af37] ring-2 ring-[#83182b] scale-[1.02]' : 'border-[#382b20] opacity-75 hover:opacity-100'
+        }`;
+        div.onclick = () => {
+          selectedTemplate = t;
+          document.getElementById('card-bg-img').src = t.image;
+          renderTemplates();
+        };
+
+        div.innerHTML = `
+          <img src="${t.image}" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          <div class="absolute bottom-1 inset-x-1 text-center">
+            <span class="text-[9px] text-[#f4ecd8] font-medium line-clamp-1">${currentLang === 'en' ? t.titleEn : t.title}</span>
+          </div>
+          ${isSelected ? '<div class="absolute top-1 right-1 w-4 h-4 bg-[#83182b] text-white rounded-full flex items-center justify-center text-[10px]">✓</div>' : ''}
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    // 6. RENDER QUOTE FILTERS & LIST
+    function renderQuotes() {
+      const authors = [
+        { id: 'all', label: currentLang === 'en' ? 'All' : 'সকল' },
+        { id: 'হুমায়ুন ফরীদি', label: currentLang === 'en' ? 'Humayun Faridi' : 'হুমায়ুন ফরীদি' },
+        { id: 'মির্জা গালিব', label: currentLang === 'en' ? 'Mirza Ghalib' : 'মির্জা গালিব' },
+        { id: 'কাজী নজরুল ইসলাম', label: currentLang === 'en' ? 'Kazi Nazrul' : 'কাজী নজরুল' },
+        { id: 'ফয়েজ আহমেদ ফয়েজ', label: currentLang === 'en' ? 'Faiz' : 'ফয়েজ' },
+        { id: 'মির তকি মির', label: currentLang === 'en' ? 'Mir Taqi Mir' : 'মির তকি মির' },
+        { id: 'হাফেজ শিরাজী', label: currentLang === 'en' ? 'Hafez' : 'হাফেজ' },
+      ];
+
+      const tagContainer = document.getElementById('quote-author-tags');
+      tagContainer.innerHTML = '';
+      authors.forEach(a => {
+        const btn = document.createElement('button');
+        const isActive = currentAuthorFilter === a.id;
+        btn.className = `px-2.5 py-1 rounded-full whitespace-nowrap transition border ${
+          isActive ? 'bg-[#83182b] text-white border-[#d4af37]' : 'bg-[#221a14] text-[#a89984] border-[#382b20]'
+        }`;
+        btn.innerText = a.label;
+        btn.onclick = () => {
+          currentAuthorFilter = a.id;
+          renderQuotes();
+        };
+        tagContainer.appendChild(btn);
+      });
+
+      const list = document.getElementById('quotes-list');
+      list.innerHTML = '';
+      const query = (document.getElementById('quote-search-input').value || '').toLowerCase().trim();
+
+      const filtered = QUOTES.filter(q => {
+        const matchesAuthor = currentAuthorFilter === 'all' || q.author === currentAuthorFilter;
+        const matchesQuery = !query || 
+          q.text.toLowerCase().includes(query) || 
+          q.textEn.toLowerCase().includes(query) || 
+          q.author.toLowerCase().includes(query) || 
+          q.authorEn.toLowerCase().includes(query);
+        return matchesAuthor && matchesQuery;
+      });
+
+      filtered.forEach(q => {
+        const text = currentLang === 'en' ? q.textEn : q.text;
+        const author = currentLang === 'en' ? q.authorEn : q.author;
+        const div = document.createElement('div');
+        div.className = 'p-3 rounded-lg border border-[#382a1f] bg-[#1e1712] hover:border-[#c5a059]/40 flex items-start justify-between gap-3';
+        div.innerHTML = `
+          <div class="space-y-1">
+            <span class="text-[10px] text-[#d4af37] font-semibold">— ${author}</span>
+            <p class="text-xs text-[#ebd9b7] leading-relaxed">“${text}”</p>
+          </div>
+          <button class="px-2.5 py-1 text-xs bg-[#2f231b] hover:bg-[#83182b] text-white rounded whitespace-nowrap font-medium">
+            ${currentLang === 'en' ? 'Use' : 'ব্যবহার করুন'}
+          </button>
+        `;
+        div.querySelector('button').onclick = () => {
+          document.getElementById('input-message').value = text;
+          updateCustomState();
+          switchTab('letter');
+        };
+        list.appendChild(div);
+      });
+    }
+
+    // 7. RENDER FONTS & COLORS
+    function renderFontAndColorControls() {
+      const fonts = [
+        { cls: 'font-noto-bengali', label: 'Bengali Serif' },
+        { cls: 'font-tiro-bengali', label: 'Tiro Bangla' },
+        { cls: 'font-dancing', label: 'Dancing Script' },
+        { cls: 'font-playfair', label: 'Playfair Serif' },
+        { cls: 'font-courier', label: 'Courier Prime' },
+      ];
+
+      const fontContainer = document.getElementById('font-family-buttons');
+      fontContainer.innerHTML = '';
+      fonts.forEach(f => {
+        const btn = document.createElement('button');
+        btn.className = `py-2 px-2.5 rounded-lg text-xs font-medium border text-left truncate transition ${
+          selectedFont === f.cls ? 'bg-[#83182b] text-white border-[#d4af37]' : 'bg-[#1e1712] text-[#b5a695] border-[#3b2c20]'
+        }`;
+        btn.innerText = f.label;
+        btn.onclick = () => {
+          selectedFont = f.cls;
+          renderFontAndColorControls();
+          updateCustomState();
+        };
+        fontContainer.appendChild(btn);
+      });
+
+      // Colors
+      const colors = ['#f6edd9', '#faebd7', '#fbf0d9', '#f3e5ab', '#ffe4e1', '#25160e', '#3d2516', '#52141d'];
+      const colorContainer = document.getElementById('color-swatches');
+      colorContainer.innerHTML = '';
+      colors.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = `w-7 h-7 rounded-full border transition flex items-center justify-center ${
+          selectedColor === c ? 'ring-2 ring-[#c5a059] scale-110' : 'border-black/40'
+        }`;
+        btn.style.backgroundColor = c;
+        if (selectedColor === c) btn.innerHTML = '<span class="text-[10px] text-[#83182b] font-bold">✓</span>';
+        btn.onclick = () => {
+          selectedColor = c;
+          renderFontAndColorControls();
+          updateCustomState();
+        };
+        colorContainer.appendChild(btn);
+      });
+
+      // Filters
+      const filters = [
+        { id: 'filter-sepia', name: 'অ্যান্টিক সেপিয়া', nameEn: 'Antique Sepia' },
+        { id: 'filter-warm', name: 'উষ্ণ অম্বর', nameEn: 'Warm Amber' },
+        { id: 'filter-gold', name: 'সোনালী ধূলিকণা', nameEn: 'Golden Dust' },
+        { id: 'filter-mono', name: 'মনোক্রোম', nameEn: 'Monochrome' },
+        { id: 'filter-fade', name: 'মলিন কাগজ', nameEn: 'Faded Paper' },
+        { id: 'filter-none', name: 'ফিল্টারহীন', nameEn: 'Original' },
+      ];
+      const filterContainer = document.getElementById('filter-buttons');
+      filterContainer.innerHTML = '';
+      filters.forEach(fl => {
+        const btn = document.createElement('button');
+        btn.className = `p-2 rounded-lg text-xs font-medium border text-left transition ${
+          selectedFilter === fl.id ? 'bg-[#83182b] text-white border-[#d4af37]' : 'bg-[#1e1712] text-[#a89984] border-[#3b2c20]'
+        }`;
+        btn.innerText = currentLang === 'en' ? fl.nameEn : fl.name;
+        btn.onclick = () => {
+          selectedFilter = fl.id;
+          renderFontAndColorControls();
+          updateCustomState();
+        };
+        filterContainer.appendChild(btn);
+      });
+    }
+
+    // 8. UPDATE PREVIEW STATE
+    function updateCustomState() {
+      const recipient = document.getElementById('input-recipient').value;
+      const message = document.getElementById('input-message').value;
+      const sender = document.getElementById('input-sender').value;
+      const date = document.getElementById('input-date').value;
+      const fontSize = document.getElementById('input-font-size').value;
+
+      document.getElementById('font-size-val').innerText = fontSize + 'px';
+
+      const cardRecipient = document.getElementById('card-recipient');
+      const cardMessage = document.getElementById('card-message');
+      const cardSender = document.getElementById('card-sender');
+      const cardDate = document.getElementById('card-date');
+      const cardBg = document.getElementById('card-bg-img');
+
+      cardRecipient.innerText = recipient;
+      cardMessage.innerText = message ? `“${message}”` : '';
+      cardSender.innerText = sender;
+      cardDate.innerText = date;
+
+      // Font size & color & align
+      cardMessage.style.fontSize = fontSize + 'px';
+      cardMessage.style.color = selectedColor;
+      cardRecipient.style.color = selectedColor;
+      cardSender.style.color = selectedColor;
+      cardMessage.style.textAlign = textAlign;
+
+      cardMessage.style.fontWeight = isBold ? 'bold' : 'normal';
+      cardMessage.style.fontStyle = isItalic ? 'italic' : 'normal';
+
+      // Font Family
+      const fontClasses = ['font-noto-bengali', 'font-tiro-bengali', 'font-dancing', 'font-playfair', 'font-courier'];
+      fontClasses.forEach(c => cardMessage.classList.remove(c));
+      cardMessage.classList.add(selectedFont);
+
+      // Filter
+      const filterClasses = ['filter-sepia', 'filter-warm', 'filter-gold', 'filter-mono', 'filter-fade', 'filter-none'];
+      filterClasses.forEach(c => cardBg.classList.remove(c));
+      cardBg.classList.add(selectedFilter);
+
+      // Stamp
+      const stampEl = document.getElementById('card-stamp');
+      stampEl.style.display = showStamp ? 'flex' : 'none';
+      if (stampType === 'wax') {
+        stampEl.className = 'w-11 h-11 rounded-full bg-[#83182b] border-2 border-[#d4af37] text-white flex items-center justify-center text-xs shadow-lg rotate-6';
+        stampEl.innerHTML = '✦';
+      } else {
+        stampEl.className = 'w-12 h-14 bg-[#faebd7]/90 border-2 border-dashed border-[#83182b] p-1 shadow-md flex flex-col items-center justify-center text-center rotate-3';
+        stampEl.innerHTML = '<span class="text-xs">🌹</span><span class="text-[8px] font-mono text-[#83182b] font-bold mt-0.5">POST 5p</span>';
+      }
+
+      // Border Style
+      const borderVal = document.getElementById('select-border').value;
+      const borderEl = document.getElementById('card-border-overlay');
+      if (borderVal === 'none') {
+        borderEl.style.display = 'none';
+      } else if (borderVal === 'double') {
+        borderEl.style.display = 'block';
+        borderEl.className = 'absolute inset-2 border-4 border-double border-[#d4af37]/70 pointer-events-none rounded';
+      } else if (borderVal === 'ornate') {
+        borderEl.style.display = 'block';
+        borderEl.className = 'absolute inset-3 border-2 border-[#d4af37]/60 pointer-events-none rounded p-1 outline outline-1 outline-[#d4af37]/40';
+      } else {
+        borderEl.style.display = 'block';
+        borderEl.className = 'absolute inset-2 border-2 border-[#d4af37]/60 pointer-events-none rounded';
+      }
+    }
+
+    // 9. SURPRISE ME
+    function handleSurpriseMe() {
+      selectedTemplate = TEMPLATES[Math.floor(Math.random() * TEMPLATES.length)];
+      document.getElementById('card-bg-img').src = selectedTemplate.image;
+      const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+      document.getElementById('input-message').value = currentLang === 'en' ? q.textEn : q.text;
+      renderTemplates();
+      updateCustomState();
+    }
+
+    // 10. TOGGLES
+    function setTextAlign(align) {
+      textAlign = align;
+      ['left', 'center', 'right'].forEach(a => {
+        const btn = document.getElementById('btn-align-' + a);
+        if (a === align) {
+          btn.className = 'px-2.5 py-1 text-xs rounded bg-[#83182b] text-white';
+        } else {
+          btn.className = 'px-2.5 py-1 text-xs rounded text-[#a89984]';
+        }
+      });
+      updateCustomState();
+    }
+
+    function toggleBold() {
+      isBold = !isBold;
+      const btn = document.getElementById('btn-bold');
+      btn.className = isBold ? 'px-3 py-1 text-xs font-bold rounded border border-[#d4af37] bg-[#83182b] text-white' : 'px-3 py-1 text-xs font-bold rounded border border-[#3b2c20] bg-[#1e1712] text-[#a89984]';
+      updateCustomState();
+    }
+
+    function toggleItalic() {
+      isItalic = !isItalic;
+      const btn = document.getElementById('btn-italic');
+      btn.className = isItalic ? 'px-3 py-1 text-xs italic rounded border border-[#d4af37] bg-[#83182b] text-white' : 'px-3 py-1 text-xs italic rounded border border-[#3b2c20] bg-[#1e1712] text-[#a89984]';
+      updateCustomState();
+    }
+
+    function toggleStamp() {
+      showStamp = !showStamp;
+      const btn = document.getElementById('btn-stamp-toggle');
+      btn.innerText = showStamp ? (currentLang === 'en' ? 'Stamp Visible ✓' : 'টিকিট দৃশ্যমান ✓') : (currentLang === 'en' ? 'Stamp Hidden' : 'টিকিট বন্ধ');
+      updateCustomState();
+    }
+
+    function toggleStampType() {
+      stampType = stampType === 'rose' ? 'wax' : 'rose';
+      const btn = document.getElementById('btn-stamp-type');
+      btn.innerText = stampType === 'wax' ? (currentLang === 'en' ? 'Type: Wax Seal' : 'ধরন: মোমের সিল') : (currentLang === 'en' ? 'Type: Stamp' : 'ধরন: ডাকটিকিট');
+      updateCustomState();
+    }
+
+    // 11. BILINGUAL TOGGLE
+    function toggleLanguage() {
+      currentLang = currentLang === 'bn' ? 'en' : 'bn';
+      document.getElementById('lang-btn-text').innerText = currentLang === 'bn' ? 'English' : 'বাংলা';
+      
+      if (currentLang === 'en') {
+        document.getElementById('hero-title').innerText = 'Pen Down Your Heart on Classic Vintage Postcards';
+        document.getElementById('hero-subtitle').innerText = 'Create aesthetic vintage postcards with aged parchment, fragrant yellow envelopes, wax seals, and timeless romantic verses.';
+        document.getElementById('nav-tagline').innerText = 'Timeless feelings of yesteryears, for today’s love';
+        document.getElementById('panel-designs-title').innerText = '1. Select Postcard Artwork';
+        document.getElementById('panel-quotes-title').innerText = '2. Romantic Quotes & Poetry';
+        document.getElementById('panel-letter-title').innerText = '3. Customize Your Letter';
+        document.getElementById('panel-style-title').innerText = '4. Typography & Layout';
+        document.getElementById('panel-effects-title').innerText = '5. Vintage Effects, Stamps & Borders';
+        document.getElementById('lbl-recipient').innerText = 'Recipient:';
+        document.getElementById('lbl-message').innerText = 'Main Message / Verse:';
+        document.getElementById('lbl-sender').innerText = 'Sender:';
+        document.getElementById('lbl-date').innerText = 'Date or Place:';
+        document.getElementById('btn-download-text').innerText = 'Download HD Postcard';
+      } else {
+        document.getElementById('hero-title').innerText = 'হৃদয়ের কথা লিখুন ক্লাসিক ভিন্টেজ পোস্টকার্ডে';
+        document.getElementById('hero-subtitle').innerText = 'পুরনো দিনের জীর্ণ চিঠি, সুবাসিত হলুদ খাম ও ধ্রুপদী প্রেমের উক্তি দিয়ে তৈরি করুন আপনার নিজস্ব নান্দনিক পোস্টকার্ড।';
+        document.getElementById('nav-tagline').innerText = 'পুরনো দিনের অনুভূতি, আজকের ভালোবাসার জন্য';
+        document.getElementById('panel-designs-title').innerText = '১. পোস্টকার্ড ডিজাইন নির্বাচন করুন';
+        document.getElementById('panel-quotes-title').innerText = '২. বিখ্যাত কবিদের রোমান্টিক উক্তি';
+        document.getElementById('panel-letter-title').innerText = '৩. চিঠি বা বার্তা কাস্টমাইজ করুন';
+        document.getElementById('panel-style-title').innerText = '৪. টাইপোগ্রাফি ও লেআউট';
+        document.getElementById('panel-effects-title').innerText = '৫. ভিন্টেজ ফিল্টার, সিলমোহর ও বর্ডার';
+        document.getElementById('lbl-recipient').innerText = 'চিঠির প্রাপক (Recipient):';
+        document.getElementById('lbl-message').innerText = 'মূল চিঠি বা পঙ্‌ক্তি (Letter Body):';
+        document.getElementById('lbl-sender').innerText = 'চিঠির প্রেরক (Sender):';
+        document.getElementById('lbl-date').innerText = 'তারিখ বা স্থান (Date/Place):';
+        document.getElementById('btn-download-text').innerText = 'HD পোস্টকার্ড ডাউনলোড করুন (Download)';
+      }
+
+      renderTemplates();
+      renderQuotes();
+      renderFontAndColorControls();
+      updateCustomState();
+    }
+
+    // 12. 8-SECOND DOWNLOAD GATE MODAL & EXPORT
+    let countdownInterval = null;
+    function openDownloadModal() {
+      document.getElementById('download-modal').classList.remove('hidden');
+      document.getElementById('countdown-container').classList.add('hidden');
+      document.getElementById('btn-perform-download').disabled = true;
+    }
+
+    function closeDownloadModal() {
+      document.getElementById('download-modal').classList.add('hidden');
+      if (countdownInterval) clearInterval(countdownInterval);
+    }
+
+    function handleSponsorClick() {
+      window.open('https://www.profitablecpmrate.com/d72n6y2h?key=aa4ab6a0f671daab3efd0aebae3e970b', '_blank');
+      document.getElementById('countdown-container').classList.remove('hidden');
+      let seconds = 8;
+      document.getElementById('countdown-val').innerText = seconds + 's';
+
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        seconds--;
+        document.getElementById('countdown-val').innerText = seconds + 's';
+        if (seconds <= 0) {
+          clearInterval(countdownInterval);
+          document.getElementById('btn-perform-download').disabled = false;
+          document.getElementById('countdown-val').innerText = '✓ Ready!';
+        }
+      }, 1000);
+    }
+
+    // Canvas HD Postcard Renderer (Pure Canvas - 100% No CSS DOMException)
+    function performCanvasExport() {
+      const canvas = document.getElementById('export-canvas');
+      const ctx = canvas.getContext('2d');
+      const width = 1200;
+      const height = 800;
+      canvas.width = width;
+      canvas.height = height;
+
+      const bgImg = new Image();
+      bgImg.crossOrigin = 'anonymous';
+      bgImg.src = selectedTemplate.image;
+
+      bgImg.onload = () => {
+        // Draw background
+        ctx.drawImage(bgImg, 0, 0, width, height);
+
+        // Dark overlay & sepia tint
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+        ctx.fillRect(0, 0, width, height);
+
+        // Border
+        const borderVal = document.getElementById('select-border').value;
+        if (borderVal !== 'none') {
+          ctx.strokeStyle = '#d4af37';
+          ctx.lineWidth = 4;
+          ctx.strokeRect(30, 30, width - 60, height - 60);
+
+          if (borderVal === 'double' || borderVal === 'ornate') {
+            ctx.strokeRect(40, 40, width - 80, height - 80);
+          }
+        }
+
+        // Recipient
+        ctx.fillStyle = selectedColor;
+        ctx.font = '600 32px "Noto Serif Bengali", serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(document.getElementById('input-recipient').value, 60, 100);
+
+        // Stamp / Seal
+        if (showStamp) {
+          ctx.strokeStyle = '#83182b';
+          ctx.lineWidth = 3;
+          ctx.strokeRect(width - 160, 70, 100, 120);
+          ctx.fillStyle = 'rgba(250, 235, 215, 0.85)';
+          ctx.fillRect(width - 160, 70, 100, 120);
+          ctx.fillStyle = '#83182b';
+          ctx.font = 'bold 20px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('POST 5p', width - 110, 140);
+        }
+
+        // Main Message with wrapping
+        const message = document.getElementById('input-message').value;
+        ctx.fillStyle = selectedColor;
+        ctx.font = `${isItalic ? 'italic ' : ''}${isBold ? 'bold ' : ''}36px "Noto Serif Bengali", serif`;
+        ctx.textAlign = 'center';
+
+        const words = message.split(' ');
+        let line = '';
+        let y = height / 2 - 30;
+        const maxWidth = width - 240;
+
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + ' ';
+          const metrics = ctx.measureText(testLine);
+          if (metrics.width > maxWidth && n > 0) {
+            ctx.fillText(line, width / 2, y);
+            line = words[n] + ' ';
+            y += 50;
+          } else {
+            line = testLine;
+          }
+        }
+        ctx.fillText(line, width / 2, y);
+
+        // Date & Sender
+        ctx.font = '24px "Courier Prime", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText(document.getElementById('input-date').value, 60, height - 70);
+
+        ctx.font = '600 30px "Noto Serif Bengali", serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(document.getElementById('input-sender').value, width - 60, height - 70);
+
+        // Trigger Download
+        const fmt = document.querySelector('input[name="modal-fmt"]:checked').value;
+        const mimeType = fmt === 'jpg' ? 'image/jpeg' : 'image/png';
+        const dataUrl = canvas.toDataURL(mimeType, 0.95);
+        const link = document.createElement('a');
+        link.download = `VintageChithi_${Date.now()}.${fmt}`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        closeDownloadModal();
+      };
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTemplates();
+      renderQuotes();
+      renderFontAndColorControls();
+      updateCustomState();
+    });
+  </script>
+</body>
+</html>
